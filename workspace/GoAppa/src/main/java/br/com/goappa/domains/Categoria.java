@@ -10,8 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityReference(alwaysAsId = true)
 @Entity
-public class Categoria  implements Serializable{
+public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -19,6 +23,7 @@ public class Categoria  implements Serializable{
 	private Integer id;
 	private String nome;
 	
+	@JsonIgnoreProperties("categorias")
 	@ManyToMany(mappedBy="categorias") 
 	private List<Produto> produtos = new ArrayList<>();
 

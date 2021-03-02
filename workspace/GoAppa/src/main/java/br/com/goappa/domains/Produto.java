@@ -16,10 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
-
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityReference(alwaysAsId = true)
 @Entity
 public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -36,7 +39,7 @@ public class Produto implements Serializable{
 	@CollectionTable(name = "IMAGEM_URL")
 	private Set<String> imagens = new HashSet<String>();
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("produtos")
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), 
 	inverseJoinColumns = @JoinColumn(name = "categoria_id"))
