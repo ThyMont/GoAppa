@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -32,8 +34,9 @@ public class Produto implements Serializable{
 	//Armazenar URL das imagens
 	@ElementCollection
 	@CollectionTable(name = "IMAGEM_URL")
-	private Set<String> imagensUrl = new HashSet<String>();
+	private Set<String> imagens = new HashSet<String>();
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), 
 	inverseJoinColumns = @JoinColumn(name = "categoria_id"))
@@ -83,11 +86,19 @@ public class Produto implements Serializable{
 	}
 
 	public Set<String> getImagens() {
-		return imagensUrl;
+		return imagens;
 	}
 
-	public void setImagens(Set<String> imagensUrl) {
-		this.imagensUrl = imagensUrl;
+	public void setImagens(Set<String> imagens) {
+		this.imagens = imagens;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 
 	@Override
