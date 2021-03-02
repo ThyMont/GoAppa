@@ -9,10 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.goappa.domains.Categoria;
 import br.com.goappa.domains.Cidade;
+import br.com.goappa.domains.Endereco;
 import br.com.goappa.domains.Estado;
 import br.com.goappa.domains.Produto;
 import br.com.goappa.repositories.CategoriaRepository;
 import br.com.goappa.repositories.CidadeRepository;
+import br.com.goappa.repositories.EnderecoRepository;
 import br.com.goappa.repositories.EstadoRepository;
 import br.com.goappa.repositories.ProdutoRepository;
 
@@ -27,6 +29,8 @@ public class GoAppaApplication implements CommandLineRunner {
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GoAppaApplication.class, args);
@@ -77,6 +81,8 @@ public class GoAppaApplication implements CommandLineRunner {
 		
 		estadoRepository.saveAll(Arrays.asList(e1, e2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		//Endereco end1 = new Endereco(null, "Rua Joaquim gomes ferreira", "Condado de york", "Vargem Grande", "22785660", )
 
 	}
 
