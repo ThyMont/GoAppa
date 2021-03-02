@@ -8,8 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.goappa.domains.Categoria;
+import br.com.goappa.domains.Cidade;
+import br.com.goappa.domains.Estado;
 import br.com.goappa.domains.Produto;
 import br.com.goappa.repositories.CategoriaRepository;
+import br.com.goappa.repositories.CidadeRepository;
+import br.com.goappa.repositories.EstadoRepository;
 import br.com.goappa.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -19,6 +23,10 @@ public class GoAppaApplication implements CommandLineRunner {
 	private CategoriaRepository categoriaRepository;
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	@Autowired
+	private EstadoRepository estadoRepository;
+	@Autowired
+	private CidadeRepository cidadeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GoAppaApplication.class, args);
@@ -56,6 +64,19 @@ public class GoAppaApplication implements CommandLineRunner {
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
+		
+		Estado e1 = new Estado(null, "Pará");
+		Estado e2 = new Estado(null, "Rio de Janeiro");
+		
+		Cidade c1 = new Cidade(null, "Belém", e1);
+		Cidade c2 = new Cidade(null, "Rio de Janeiro", e2);
+		Cidade c3 = new Cidade(null, "Marituba", e1);
+		
+		e1.getCidades().addAll(Arrays.asList(c1, c3));
+		e2.getCidades().addAll(Arrays.asList(c2));
+		
+		estadoRepository.saveAll(Arrays.asList(e1, e2));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
 	}
 
